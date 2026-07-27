@@ -19,9 +19,9 @@ namespace StudentRegistration.App
             bool exit = false;
             while (!exit)
             {
-                Console.WriteLine("\n==============================================");
-                Console.WriteLine("   STUDENT REGISTRATION SYSTEM (INTERACTIVE)");
-                Console.WriteLine("==============================================");
+                Console.WriteLine("\n================================");
+                Console.WriteLine("   STUDENT REGISTRATION SYSTEM ");
+                Console.WriteLine("==================================");
                 Console.WriteLine("1. Add a New Student");
                 Console.WriteLine("2. Add a New Course");
                 Console.WriteLine("3. Register Student for a Course");
@@ -66,22 +66,22 @@ namespace StudentRegistration.App
 
         static void SetupInitialData()
         {
-            var cs201 = new Course
+            var TEB1043 = new Course
             {
-                CourseCode = "CS201",
-                Title = "Data Structures",
+                CourseCode = "TEB1043",
+                Title = "Object-Oriented Programming",
                 Capacity = 1,
-                Prerequisites = new List<string> { "PRG101" }
+                Prerequisites = new List<string> { "TEB1023 Structured Programming" }
             };
-            courses.Add(cs201);
+            courses.Add(TEB1043);
 
-            var alice = new Student
+            var mars = new Student
             {
-                UserId = "S101",
-                Name = "Alice",
-                CompletedCourses = new List<string> { "PRG101" }
+                UserId = "22021022",
+                Name = "Mars",
+                CompletedCourses = new List<string> { "TEB1023 Structured Programming" }
             };
-            students.Add(alice);
+            students.Add(mars);
         }
 
         static void AddStudent()
@@ -95,8 +95,8 @@ namespace StudentRegistration.App
             Console.Write("Enter completed courses separated by comma (e.g. PRG101, MTH101) or leave empty: ");
             string prereqInput = Console.ReadLine()?.Trim();
 
-            List<string> completed = string.IsNullOrEmpty(prereqInput) 
-                ? new List<string>() 
+            List<string> completed = string.IsNullOrEmpty(prereqInput)
+                ? new List<string>()
                 : prereqInput.Split(',').Select(p => p.Trim()).ToList();
 
             students.Add(new Student { UserId = id, Name = name, CompletedCourses = completed });
@@ -105,7 +105,7 @@ namespace StudentRegistration.App
 
         static void AddCourse()
         {
-            Console.Write("\nEnter Course Code (e.g. CS301): ");
+            Console.Write("\nEnter Course Code (e.g. TEB1043): ");
             string code = Console.ReadLine()?.Trim().ToUpper();
 
             Console.Write("Enter Course Title: ");
@@ -114,11 +114,11 @@ namespace StudentRegistration.App
             Console.Write("Enter Capacity Limit (e.g. 2): ");
             int.TryParse(Console.ReadLine()?.Trim(), out int cap);
 
-            Console.Write("Enter required prerequisites separated by comma (e.g. PRG101) or leave empty: ");
+            Console.Write("Enter required prerequisites separated by comma (e.g. TEB1023) or leave empty: ");
             string prereqInput = Console.ReadLine()?.Trim();
 
-            List<string> prereqs = string.IsNullOrEmpty(prereqInput) 
-                ? new List<string>() 
+            List<string> prereqs = string.IsNullOrEmpty(prereqInput)
+                ? new List<string>()
                 : prereqInput.Split(',').Select(p => p.Trim()).ToList();
 
             courses.Add(new Course { CourseCode = code, Title = title, Capacity = cap, Prerequisites = prereqs });
