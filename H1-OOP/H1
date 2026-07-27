@@ -1,0 +1,56 @@
+#include <iostream>
+#include <math.h>
+#define G 9.81
+#define PI 3.1415926535
+using namespace std;
+
+float t_flight(float &speed, float &launchangle_degree){
+
+    float result;
+    float launchangle_radians = launchangle_degree*(PI/180);
+    result = 2*speed*sin(launchangle_radians)/G;
+    return result;
+
+}
+
+float max_height(float &speed, float &launchangle_degree){
+    float result;
+    float launchangle_radians = launchangle_degree*(PI/180);
+    result = (speed * speed) * (sin(launchangle_radians) * sin(launchangle_radians)) / (2 * G);
+    return result;
+
+}
+
+// Maximum height:  H_max = vy² / (2 g) = (v² sin² θ) / (2 g
+
+
+float horizontal_range(float &speed, float &launchangle_degree){
+    float result;
+    float launchangle_radians = launchangle_degree*(PI/180);
+    result = (speed*speed)*sin(2*launchangle_radians)/G;
+    return result;
+    
+}
+
+
+float vertical_range(float &speed, float &launchangle_degree, float &x){
+    float result;
+    float launchangle_radians = launchangle_degree*(PI/180);
+    result = x*tan(launchangle_radians) - (G*(x*x)) / (2*(speed*speed)*cos(launchangle_radians)*cos(launchangle_radians));
+    return result;
+
+}
+    
+
+int main(){
+    float speedofrocket = 25;
+    float launchangleofrocket = 45;
+    float x = 15;
+    t_flight(speedofrocket, launchangleofrocket);
+    cout << "Time of Flight is: " << t_flight(speedofrocket,launchangleofrocket) << endl;
+    cout << "Maximum Height is: " << max_height(speedofrocket, launchangleofrocket) << endl;
+    cout << "Horizontal Range is: " << horizontal_range(speedofrocket,launchangleofrocket) << endl;
+    cout << "Vertical Range is: " << vertical_range(speedofrocket, launchangleofrocket,x) << endl;
+    return 0;
+    
+}
