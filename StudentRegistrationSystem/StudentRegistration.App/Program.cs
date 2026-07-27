@@ -86,13 +86,13 @@ namespace StudentRegistration.App
 
         static void AddStudent()
         {
-            Console.Write("\nEnter Student ID (e.g. S102): ");
+            Console.Write("\nEnter Student ID (e.g. 22011423): ");
             string id = Console.ReadLine()?.Trim();
 
             Console.Write("Enter Student Name: ");
             string name = Console.ReadLine()?.Trim();
 
-            Console.Write("Enter completed courses separated by comma (e.g. PRG101, MTH101) or leave empty: ");
+            Console.Write("Enter completed courses separated by comma (e.g. TEB1023, TEB1043) or leave empty: ");
             string prereqInput = Console.ReadLine()?.Trim();
 
             List<string> completed = string.IsNullOrEmpty(prereqInput)
