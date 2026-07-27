@@ -1,0 +1,46 @@
+classDiagram
+    class Role {
+        <<enumeration>>
+        Student
+        Faculty
+        Administrator
+    }
+
+    class User {
+        +string UserId
+        +string Name
+        +Role UserRole
+    }
+
+    class Student {
+        +List~string~ CompletedCourses
+        +List~Course~ EnrolledCourses
+        +Student()
+        +DisplaySchedule() void
+    }
+
+    class Course {
+        -object _lock
+        +string CourseCode
+        +string Title
+        +int Capacity
+        +List~string~ Prerequisites
+        +List~Student~ EnrolledStudents
+        +Queue~Student~ Waitlist
+        +TryRegister(Student student, out string resultMessage) bool
+        +Drop(Student student, out string resultMessage) bool
+    }
+
+    class RegistrationService {
+        -List~string~ _auditLog
+        +RegisterStudentToCourse(Student student, Course course) void
+        +DropStudentFromCourse(Student student, Course course) void
+        +PrintAuditLogs() void
+        -LogAudit(string action) void
+    }
+
+    User <|-- Student : Inherits
+    User --> Role : Uses
+    Course "1" *-- "*" Student : Enrolls / Waitlists
+    RegistrationService --> Course : Operates On
+    RegistrationService --> Student : Operates On
